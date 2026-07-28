@@ -16,13 +16,26 @@ export function ContactForm({
   async function onSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
     setLoading(true);
-    // Architecture ready for future backend / CRM / email integration.
-    await new Promise((r) => setTimeout(r, 700));
-    setLoading(false);
-    (e.target as HTMLFormElement).reset();
-    toast.success("Message received", {
-      description: "We'll get back to you within one business day.",
-    });
+    const form = e.target as HTMLFormElement;
+    const data = Object.fromEntries(new FormData(form).entries());
+    try {
+      const res = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data),
+      });
+      if (!res.ok) throw new Error("Server error");
+      form.reset();
+      toast.success("Message received", {
+        description: "We'll get back to you within one business day.",
+      });
+    } catch {
+      toast.error("Failed to send", {
+        description: "Please try again or email us directly at hello@novarks.com",
+      });
+    } finally {
+      setLoading(false);
+    }
   }
 
   return (
