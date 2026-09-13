@@ -1,53 +1,68 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { SiteLayout } from "@/components/layout";
-import {
-  Hero,
-  About,
-  Services,
-  FeaturedSolutions,
-  HowWeWork,
-  WhyNovark,
-  Technologies,
-  Leadership,
-  CTA,
-} from "@/components/home-sections";
-import { ProductShowcase } from "@/components/product-showcase";
+import { useLayoutEffect } from "react";
+
+import { Navbar } from "@/components/site/Navbar";
+import { Atmosphere } from "@/components/site/Atmosphere";
+import { Hero } from "@/components/site/Hero";
+import { ProductShowcase } from "@/components/site/ProductShowcase";
+import { OrbitOpsExperience } from "@/components/site/OrbitOpsExperience";
+import { JosephPayExperience } from "@/components/site/JosephPayExperience";
+import { Capabilities } from "@/components/site/Capabilities";
+import { Vision } from "@/components/site/Vision";
+import { Leadership } from "@/components/site/Leadership";
+import { Footer } from "@/components/site/Footer";
+
+const title = "Novarks — Technology products, business systems and AI";
+const description =
+  "Novarks builds technology that moves businesses forward: our own products OrbitOps and JosephPay, custom business systems, and AI automation.";
 
 export const Route = createFileRoute("/")({
-  component: Index,
   head: () => ({
     meta: [
-      { title: "Novark — Premium Software, AI & Enterprise Solutions" },
-      {
-        name: "description",
-        content:
-          "Novark designs and develops premium software, AI solutions, and business platforms built for long-term growth.",
-      },
-      { property: "og:title", content: "Novark — Premium Software, AI & Enterprise Solutions" },
-      {
-        property: "og:description",
-        content:
-          "Novark designs and develops premium software, AI solutions, and business platforms built for long-term growth.",
-      },
-      { property: "og:url", content: "/" },
+      { title },
+      { name: "description", content: description },
+      { property: "og:title", content: title },
+      { property: "og:description", content: description },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary_large_image" },
     ],
-    links: [{ rel: "canonical", href: "/" }],
   }),
+  component: Index,
 });
 
 function Index() {
+  useLayoutEffect(() => {
+    if (window.location.pathname !== "/") return;
+
+    window.history.scrollRestoration = "manual";
+    if (window.location.hash) {
+      window.history.replaceState(window.history.state, "", "/");
+    }
+
+    const reset = () => window.scrollTo({ top: 0, left: 0, behavior: "instant" });
+    reset();
+    const firstFrame = requestAnimationFrame(() => {
+      reset();
+      requestAnimationFrame(reset);
+    });
+
+    return () => cancelAnimationFrame(firstFrame);
+  }, []);
+
   return (
-    <SiteLayout>
-      <Hero />
-      <About />
-      <ProductShowcase />
-      <Services />
-      <FeaturedSolutions />
-      <HowWeWork />
-      <WhyNovark />
-      <Technologies />
-      <Leadership />
-      <CTA />
-    </SiteLayout>
+    <div className="relative min-h-screen">
+      <Atmosphere />
+      <Navbar />
+      <main>
+        <Hero />
+        <ProductShowcase />
+        <OrbitOpsExperience />
+        <JosephPayExperience />
+        <Capabilities />
+        <Vision />
+        <Leadership />
+      </main>
+      <Footer />
+    </div>
   );
 }
