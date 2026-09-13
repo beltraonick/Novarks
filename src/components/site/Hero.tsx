@@ -1,6 +1,6 @@
 import { useRef } from "react";
 
-import orbitDevices from "@/assets/orbitops-devices.png.asset.json";
+const orbitDevicesUrl = "/images/orbitops-devices.png";
 import {
   mix,
   range,
@@ -183,7 +183,7 @@ export function Hero() {
 
               <Reveal delay={200} className="relative lg:-mr-6">
                 <img
-                  src={orbitDevices.url}
+                  src={orbitDevicesUrl}
                   alt="OrbitOps construction operations dashboard on a MacBook and iPhone"
                   width={836}
                   height={541}

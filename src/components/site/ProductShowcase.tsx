@@ -1,7 +1,7 @@
-import orbitopsShowcase from "@/assets/orbitops-showcase.png.asset.json";
-import orbitopsLogo from "@/assets/orbitops-logo.png.asset.json";
-import josephpayShowcase from "@/assets/josephpay-showcase.png.asset.json";
-import josephpayLogo from "@/assets/josephpay-logo.png.asset.json";
+const orbitopsShowcaseUrl = "/images/orbitops-showcase.png";
+const orbitopsLogoUrl = "/images/orbitops-logo.png";
+const josephpayShowcaseUrl = "/images/josephpay-showcase.png";
+const josephpayLogoUrl = "/images/josephpay-logo.png";
 import { ProductCard } from "./ProductCard";
 import { Reveal } from "./Reveal";
 import { TextLink } from "./ActionButton";
@@ -10,7 +10,7 @@ function OrbitMark() {
   return (
     <span className="block h-9 w-9 overflow-hidden rounded-xl border border-orbitops/20 shadow-sm">
       <img
-        src={orbitopsLogo.url}
+        src={orbitopsLogoUrl}
         alt="OrbitOps logo"
         loading="lazy"
         width={72}
@@ -25,7 +25,7 @@ function JosephMark() {
   return (
     <span className="block h-9 w-9 overflow-hidden rounded-xl border border-josephpay/20 shadow-sm">
       <img
-        src={josephpayLogo.url}
+        src={josephpayLogoUrl}
         alt="JosephPay logo"
         loading="lazy"
         width={72}
@@ -84,7 +84,7 @@ export function ProductShowcase() {
               ctaLabel="Explore OrbitOps"
               href="#products"
               status="IN DEVELOPMENT"
-              image={orbitopsShowcase.url}
+              image={orbitopsShowcaseUrl}
               imageAlt="OrbitOps workforce management dashboard across laptop and mobile devices"
               theme="orbitops"
               className="h-full"
@@ -100,7 +100,7 @@ export function ProductShowcase() {
               ctaLabel="Explore JosephPay"
               href="#products"
               status="LIVE"
-              image={josephpayShowcase.url}
+              image={josephpayShowcaseUrl}
               imageAlt="JosephPay business growth platform dashboard across laptop and mobile devices"
               theme="josephpay"
               className="h-full"
