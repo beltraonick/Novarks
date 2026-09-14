@@ -56,8 +56,8 @@ function Index() {
       <main>
         <Hero />
         <ProductShowcase />
-        <OrbitOpsExperience />
         <JosephPayExperience />
+        <OrbitOpsExperience />
         <Capabilities />
         <Vision />
         <Leadership />

@@ -1,20 +1,13 @@
 import { useRef } from "react";
 
 import { mix, useReducedMotion, useViewProgress } from "@/hooks/use-scroll-motion";
+import { useT } from "@/i18n";
 import { Reveal } from "./Reveal";
-import { SystemFlow, type FlowStep } from "./SystemFlow";
+import { SystemFlow } from "./SystemFlow";
 import { TextLink } from "./ActionButton";
 
-const steps: FlowStep[] = [
-  { label: "Attract", detail: "Marketing and social reach." },
-  { label: "Capture", detail: "Leads land in one place." },
-  { label: "Organize", detail: "Conversations and pipeline." },
-  { label: "Convert", detail: "Offers, follow-up, payments." },
-  { label: "Retain", detail: "Loyalty and re-engagement." },
-  { label: "Measure", detail: "What actually drives revenue." },
-];
-
 export function JosephPayExperience() {
+  const t = useT();
   const ref = useRef<HTMLElement>(null);
   const reduced = useReducedMotion();
   const vp = useViewProgress(ref, !reduced);
@@ -33,26 +26,24 @@ export function JosephPayExperience() {
 
       <div className="mx-auto max-w-[1400px] px-6 lg:px-10">
         <div>
-
           <div>
             <Reveal>
-              <p className="eyebrow">Product 02 — JosephPay</p>
+              <p className="eyebrow">{t.josephpay.eyebrow}</p>
             </Reveal>
             <Reveal delay={90}>
               <h2 className="mt-6 max-w-md text-3xl font-medium leading-[1.08] tracking-[-0.03em] text-foreground sm:text-[2.75rem]">
-                From attention to revenue.
+                {t.josephpay.headline}
               </h2>
             </Reveal>
             <Reveal delay={160}>
               <p className="mt-6 max-w-md text-sm leading-relaxed text-muted-foreground">
-                JosephPay is the system a business runs its growth on: every lead,
-                conversation, payment and campaign connected end to end.
+                {t.josephpay.description}
               </p>
             </Reveal>
             <Reveal delay={240}>
               <div className="mt-9">
                 <TextLink href="#products" className="text-foreground/90">
-                  Explore JosephPay
+                  {t.josephpay.cta}
                 </TextLink>
               </div>
             </Reveal>
@@ -60,7 +51,7 @@ export function JosephPayExperience() {
         </div>
 
         <SystemFlow
-          steps={steps}
+          steps={t.josephpay.steps}
           accentVar="var(--josephpay)"
           className="mt-24 lg:mt-32"
         />

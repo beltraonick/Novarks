@@ -10,7 +10,7 @@ export interface FlowStep {
 }
 
 interface SystemFlowProps {
-  steps: FlowStep[];
+  steps: readonly FlowStep[];
   /** CSS color for the accent rail and node marks. */
   accentVar: string;
   className?: string;

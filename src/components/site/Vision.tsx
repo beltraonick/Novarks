@@ -7,16 +7,12 @@ import {
   useReducedMotion,
   useViewProgress,
 } from "@/hooks/use-scroll-motion";
+import { useT } from "@/i18n";
 import { ActionButton } from "./ActionButton";
 import { Reveal } from "./Reveal";
 
-const pillars = [
-  { top: "Bigger", bottom: "Businesses" },
-  { top: "Smarter", bottom: "Operations" },
-  { top: "Brighter", bottom: "Futures" },
-];
-
 export function Vision() {
+  const t = useT();
   const ref = useRef<HTMLElement>(null);
   const reduced = useReducedMotion();
   const vp = useViewProgress(ref, !reduced);
@@ -67,17 +63,19 @@ export function Vision() {
         <Reveal className="max-w-xl">
           <div style={copyStyle} className="will-change-transform">
             <h2 className="text-3xl font-medium leading-[1.1] tracking-[-0.03em] text-foreground sm:text-5xl">
-              A more efficient
-              <br />
-              tomorrow is possible.
+              {t.vision.headline.split("\n").map((line, i) => (
+                <span key={i}>
+                  {i > 0 && <br />}
+                  {line}
+                </span>
+              ))}
             </h2>
             <p className="mt-6 max-w-md text-sm leading-relaxed text-muted-foreground">
-              We believe technology should do more than look good. It should make work
-              simpler, faster and more meaningful.
+              {t.vision.sub}
             </p>
             <div className="mt-9">
               <ActionButton href="#contact" variant="outline">
-                Let's build together
+                {t.vision.cta}
               </ActionButton>
             </div>
           </div>
@@ -85,7 +83,7 @@ export function Vision() {
 
         <Reveal delay={220}>
           <ul className="grid grid-cols-3 gap-6 sm:gap-10">
-            {pillars.map((pillar, i) => (
+            {t.vision.pillars.map((pillar, i) => (
               <li
                 key={pillar.top}
                 className="border-l border-border pl-4 first:border-l-0 first:pl-0 sm:pl-8"
