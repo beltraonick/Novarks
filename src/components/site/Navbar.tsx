@@ -5,7 +5,7 @@ import { cn } from "@/lib/utils";
 import { useT, useLocale, type Locale } from "@/i18n";
 import { ActionButton } from "./ActionButton";
 
-const hrefs = ["#products", "#services", "#about", "#careers"];
+const hrefs = ["#products", "#services", "#contact"];
 
 const locales: { code: Locale; flag: string; label: string }[] = [
   { code: "en", flag: "🇺🇸", label: "English" },
