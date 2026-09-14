@@ -1,6 +1,7 @@
 import { Facebook, Instagram, Twitter } from "lucide-react";
+import { useT } from "@/i18n";
 
-const links = ["Products", "Services", "About", "Careers", "Contact"];
+const hrefs = ["#products", "#services", "#about", "#careers", "#contact"];
 
 const socials = [
   { icon: Facebook, label: "Facebook" },
@@ -9,6 +10,8 @@ const socials = [
 ];
 
 export function Footer() {
+  const t = useT();
+
   return (
     <footer id="contact" className="relative py-16">
       <div className="mx-auto grid max-w-[1400px] gap-10 px-6 lg:grid-cols-[minmax(0,1fr)_auto] lg:items-start lg:px-10">
@@ -16,20 +19,18 @@ export function Footer() {
           <p className="text-base font-semibold tracking-[0.24em] text-foreground">
             NOVARKS
           </p>
-          <p className="mt-2 text-xs text-muted-foreground">
-            Software for a more efficient tomorrow.
-          </p>
+          <p className="mt-2 text-xs text-muted-foreground">{t.footer.tagline}</p>
         </div>
 
         <div className="grid gap-8 lg:justify-items-end">
           <ul className="flex flex-wrap gap-x-8 gap-y-3">
-            {links.map((link) => (
-              <li key={link}>
+            {t.footer.links.map((label, i) => (
+              <li key={label}>
                 <a
-                  href={`#${link.toLowerCase()}`}
+                  href={hrefs[i]}
                   className="text-xs text-muted-foreground transition-colors hover:text-foreground"
                 >
-                  {link}
+                  {label}
                 </a>
               </li>
             ))}
@@ -48,8 +49,8 @@ export function Footer() {
             ))}
           </ul>
           <p className="text-[11px] leading-relaxed text-muted-foreground lg:text-right">
-            © 2024–2026 Novarks. Operated by Nicollas Beltrão LLC.
-            <span className="ml-2">North Carolina, USA.</span>
+            {t.footer.copy}
+            <span className="ml-2">{t.footer.location}</span>
           </p>
         </div>
       </div>

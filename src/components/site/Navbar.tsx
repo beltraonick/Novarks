@@ -2,16 +2,13 @@ import { useEffect, useState } from "react";
 import { Menu, X } from "lucide-react";
 
 import { cn } from "@/lib/utils";
+import { useT } from "@/i18n";
 import { ActionButton } from "./ActionButton";
 
-const links = [
-  { label: "Products", href: "#products" },
-  { label: "Services", href: "#services" },
-  { label: "About", href: "#about" },
-  { label: "Careers", href: "#careers" },
-];
+const hrefs = ["#products", "#services", "#about", "#careers"];
 
 export function Navbar() {
+  const t = useT();
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
 
@@ -21,6 +18,8 @@ export function Navbar() {
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
+
+  const links = t.nav.links.map((label, i) => ({ label, href: hrefs[i] }));
 
   return (
     <header
@@ -59,7 +58,7 @@ export function Navbar() {
             variant="outline"
             className="hidden px-5 py-2.5 sm:inline-flex"
           >
-            Get in touch
+            {t.nav.cta}
           </ActionButton>
           <button
             type="button"
@@ -97,7 +96,7 @@ export function Navbar() {
               onClick={() => setOpen(false)}
               className="w-full"
             >
-              Get in touch
+              {t.nav.cta}
             </ActionButton>
           </li>
         </ul>

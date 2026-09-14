@@ -1,6 +1,6 @@
 import { useRef } from "react";
 
-const orbitDevicesUrl = "/images/orbitops-devices.png";
+const josephpayShowcaseUrl = "/images/josephpay-showcase.png";
 import {
   mix,
   range,
@@ -12,15 +12,10 @@ import {
 import { ActionButton } from "./ActionButton";
 import { DigitalTerrain } from "./DigitalTerrain";
 import { Reveal } from "./Reveal";
-
-const stats = [
-  { value: "2+", label: "Products" },
-  { value: "20+", label: "Projects Delivered" },
-  { value: "100%", label: "Client-Focused" },
-  { value: "Global", label: "Remote-First" },
-];
+import { useT } from "@/i18n";
 
 export function Hero() {
+  const t = useT();
   const wrapRef = useRef<HTMLDivElement>(null);
   const reduced = useReducedMotion();
   const isDesktop = useMediaQuery("(min-width: 1024px)");
@@ -36,29 +31,29 @@ export function Hero() {
   const buttons = range(p, 0.14, 0.6);
   const device = range(p, 0, 0.9);
 
-  const t = (y: number, scale = 1) =>
+  const tr = (y: number, scale = 1) =>
     `translate3d(0, ${y}px, 0) scale(${scale})`;
 
   // --- Depth layers (slowest at the back) ---
   const haloStyle = cinematic
     ? {
         opacity: mix(0.55, 1, device),
-        transform: t(mix(0, 18, p), mix(1, 1.16, device)),
+        transform: tr(mix(0, 18, p), mix(1, 1.16, device)),
       }
     : mobile
-      ? { opacity: mix(0.5, 0.95, mp), transform: t(0, mix(0.98, 1.14, mp)) }
+      ? { opacity: mix(0.5, 0.95, mp), transform: tr(0, mix(0.98, 1.14, mp)) }
       : undefined;
 
   const skyStyle = cinematic
-    ? { opacity: mix(1, 0.18, range(p, 0.48, 1)), transform: t(mix(0, 24, p), mix(1, 1.035, p)) }
+    ? { opacity: mix(1, 0.18, range(p, 0.48, 1)), transform: tr(mix(0, 24, p), mix(1, 1.035, p)) }
     : mobile
-      ? { opacity: mix(1, 0.45, range(mp, 0.55, 1)), transform: t(mix(-8, 14, mp), 1.02) }
+      ? { opacity: mix(1, 0.45, range(mp, 0.55, 1)), transform: tr(mix(-8, 14, mp), 1.02) }
       : undefined;
 
   const groundStyle = cinematic
-    ? { opacity: mix(0.82, 0.08, range(p, 0.42, 1)), transform: t(mix(0, -46, p), mix(1, 1.06, p)) }
+    ? { opacity: mix(0.82, 0.08, range(p, 0.42, 1)), transform: tr(mix(0, -46, p), mix(1, 1.06, p)) }
     : mobile
-      ? { opacity: mix(0.72, 0.2, range(mp, 0.55, 1)), transform: t(mix(12, -18, mp), 1.03) }
+      ? { opacity: mix(0.72, 0.2, range(mp, 0.55, 1)), transform: tr(mix(12, -18, mp), 1.03) }
       : undefined;
 
   const deviceStyle = cinematic
@@ -74,23 +69,23 @@ export function Hero() {
   const headlineStyle = cinematic
     ? {
         opacity: mix(1, 0.04, headline),
-        transform: t(mix(0, -46, headline)),
+        transform: tr(mix(0, -46, headline)),
       }
     : mobile
-      ? { transform: t(mix(0, -16, range(mp, 0.4, 1))) }
+      ? { transform: tr(mix(0, -16, range(mp, 0.4, 1))) }
       : undefined;
 
   const supportStyle = cinematic
-    ? { opacity: mix(1, 0, support), transform: t(mix(0, -34, support)) }
+    ? { opacity: mix(1, 0, support), transform: tr(mix(0, -34, support)) }
     : mobile
       ? {
           opacity: mix(1, 0.4, range(mp, 0.5, 1)),
-          transform: t(mix(0, -12, range(mp, 0.4, 1))),
+          transform: tr(mix(0, -12, range(mp, 0.4, 1))),
         }
       : undefined;
 
   const buttonsStyle = cinematic
-    ? { opacity: mix(1, 0, buttons), transform: t(mix(0, -30, buttons)) }
+    ? { opacity: mix(1, 0, buttons), transform: tr(mix(0, -30, buttons)) }
     : supportStyle;
 
   return (
@@ -146,35 +141,33 @@ export function Hero() {
               <div className="max-w-2xl">
                 <div style={supportStyle} className="will-change-transform">
                   <Reveal>
-                    <p className="eyebrow">Software. AI. Products.</p>
+                    <p className="eyebrow">{t.hero.eyebrow}</p>
                   </Reveal>
                 </div>
                 <div style={headlineStyle} className="will-change-transform">
                   <Reveal delay={80}>
                     <h1 className="mt-6 text-[2.6rem] font-medium leading-[1.05] tracking-[-0.035em] text-foreground drop-shadow-[0_10px_40px_oklch(0_0_0/0.6)] sm:text-6xl lg:text-[4.25rem]">
-                      We build
-                      <br className="hidden sm:block" /> technology that
-                      <br className="hidden sm:block" /> moves businesses
+                      {t.hero.headline1}
+                      <br className="hidden sm:block" /> {t.hero.headline2}
+                      <br className="hidden sm:block" /> {t.hero.headline3}
                       <br className="hidden sm:block" />{" "}
-                      <span className="text-violet">forward.</span>
+                      <span className="text-violet">{t.hero.highlight}</span>
                     </h1>
                   </Reveal>
                 </div>
                 <div style={supportStyle} className="will-change-transform">
                   <Reveal delay={160}>
                     <p className="mt-7 max-w-xl text-base leading-relaxed text-muted-foreground">
-                      From business systems and automation to products used in the
-                      field, Novarks designs and builds technology around real-world
-                      problems.
+                      {t.hero.sub}
                     </p>
                   </Reveal>
                 </div>
                 <div style={buttonsStyle} className="will-change-transform">
                   <Reveal delay={240}>
                     <div className="mt-9 flex flex-col gap-3 sm:flex-row">
-                      <ActionButton href="#products">Explore our products</ActionButton>
+                      <ActionButton href="#products">{t.hero.cta1}</ActionButton>
                       <ActionButton href="#contact" variant="outline" arrow={false}>
-                        Build with Novarks
+                        {t.hero.cta2}
                       </ActionButton>
                     </div>
                   </Reveal>
@@ -183,8 +176,8 @@ export function Hero() {
 
               <Reveal delay={200} className="relative lg:-mr-6">
                 <img
-                  src={orbitDevicesUrl}
-                  alt="OrbitOps construction operations dashboard on a MacBook and iPhone"
+                  src={josephpayShowcaseUrl}
+                  alt="JosephPay business growth platform dashboard"
                   width={836}
                   height={541}
                   fetchPriority="high"
@@ -195,9 +188,9 @@ export function Hero() {
                   style={supportStyle}
                   className="mt-2 hidden text-right text-[10px] font-medium uppercase tracking-[0.22em] text-muted-foreground lg:block"
                 >
-                  Built for <span className="text-foreground/40">———</span>
+                  {t.hero.builtFor} <span className="text-foreground/40">———</span>
                   <br />
-                  real progress.
+                  {t.hero.realProgress}
                 </p>
               </Reveal>
             </div>
@@ -205,7 +198,7 @@ export function Hero() {
             {/* Metrics live inside the same cinematic environment */}
             <div className="mx-auto w-full max-w-[1400px] px-6 pb-14 lg:px-10 lg:pb-16">
               <div className="grid grid-cols-2 gap-8 sm:grid-cols-4">
-                {stats.map((stat, i) => (
+                {t.hero.stats.map((stat, i) => (
                   <Reveal key={stat.label} delay={i * 90} distance={18}>
                     <p className="text-xl font-medium tracking-tight text-foreground">
                       {stat.value}
